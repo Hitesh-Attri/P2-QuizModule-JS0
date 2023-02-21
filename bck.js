@@ -4,7 +4,7 @@ function btn(){
 
 let quizDB = [
     {
-        quesion: "Q1: What is the full form of HTML?",
+        question: "Q1: What is the full form of HTML?",
         a:"Hello To My Land",
         b:"Hey Text Markup Language",
         c:"HyperText Markup Language",
@@ -12,7 +12,7 @@ let quizDB = [
         ans:"ans4"
     },
     {
-        quesion: "Q2: What is the full form of CSS?",
+        question: "Q2: What is the full form of CSS?",
         a:"Cascading Style Sheets",
         b:"Cascading Style Sheep",
         c:"Cartoon Style Sheets",
@@ -20,7 +20,7 @@ let quizDB = [
         ans:"ans1"
     },
     {
-        quesion: "Q3: What is the full form of HTTP?",
+        question: "Q3: What is the full form of HTTP?",
         a:"Hypertext Transfer Product",
         b:"Hypertext Test Protocol",
         c:"Hey Transfer Protocol",
@@ -28,7 +28,7 @@ let quizDB = [
         ans:"ans4"
     },
     {
-        quesion: "Q3: What is the full form of JS?",
+        question: "Q3: What is the full form of JS?",
         a:"JavaScript",
         b:"JavaSuper",
         c:"JustScript",
@@ -38,10 +38,24 @@ let quizDB = [
 ];
 
 let question = document.querySelector('.question');
-let option1 = document.querySelector('#option1');
-let option2 = document.querySelector('#option2');
-let option3 = document.querySelector('#option3');
-let option4 = document.querySelector('#option4');
-
+let option1 = document.querySelector('#op1');
+let option2 = document.querySelector('#op2');
+let option3 = document.querySelector('#op3');
+let option4 = document.querySelector('#op4');
+// let ele = document.getElementById('op1');
 let submit = document.querySelector('#submit');
 
+let qCnt = 2;
+
+let loadQuestion = function(){
+    question.innerText = quizDB[qCnt].question;
+console.log( option1.innerText );
+
+    option1.innerHTML = quizDB[qCnt].a;
+    option2.innerHTML = quizDB[qCnt].b;
+    option3.innerHTML = quizDB[qCnt].c;
+    option4.innerHTML = quizDB[qCnt].d;
+    // console.log( ele.innerHTML );
+}
+
+loadQuestion();
