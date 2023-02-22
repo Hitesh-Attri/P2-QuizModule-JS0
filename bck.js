@@ -94,16 +94,22 @@ let option4 = document.querySelector('#op4');
 let submit = document.querySelector('#submit');
 let next = document.querySelector('#nextBtn');
 let correctIncorrect = document.getElementById("correct-incorrect");
+let divQuestionWindow = document.getElementById("question-window");
+let divAnswerKey = document.getElementById("answerKey");
+
+divAnswerKey.style.display = 'none';
 
 let answers = document.querySelectorAll('.answer');
 
-console.log(answers);
+// console.log(answers);
 
-let qCnt = 0;
+let qCnt = 9;
 let score = 0;
 
 let loadQuestion = function(){
 
+    correctIncorrect.style.display = 'none';
+    next.style.display="none";
     question.innerText = quizDB[qCnt].question;
     // console.log( option1.innerText );
 
@@ -137,15 +143,107 @@ submit.addEventListener('click',function(){
     }
     else if(checkedAnswerId === quizDB[qCnt].ans){
         score++;
-        correctIncorrect.style.display = "visible";
+        // correctIncorrect.style.display = "visible";
+        correctIncorrect.style.display = '';
         correctIncorrect.innerHTML = "Correct";
         correctIncorrect.style.backgroundColor = "#7fffd4";
+        showNextHideSub();
     }
     else{
         correctIncorrect.innerHTML = "Incorrect";
-        correctIncorrect.style.display = "visible";
+        correctIncorrect.style.display = '';
+        // correctIncorrect.style.display = "visible";
         correctIncorrect.style.backgroundColor = "#ffcccb";
+        showNextHideSub();
     }
+    
+    
     console.log(score);
     console.log(checkedAnswerId);
+    // qCnt++;
+    // loadQuestion();
+});
+
+next.addEventListener('click',function(){
+    qCnt++;
+    hideNextShowSubmit();
+    console.log(qCnt,quizDB.length);
+    if(qCnt == quizDB.length){
+        showAnswerKey();
+    }else{
+        loadQuestion();
+    }
+
+});
+
+function showNextHideSub(){
+    next.style.display = '';
+    submit.style.display = 'none';
+}
+
+function hideNextShowSubmit(){
+    next.style.display = 'none';
+    submit.style.display = '';
+}
+
+function showAnswerKey(){
+    let ele = document.getElementById("score");
+    const one = "Score: ";
+    const two = score;
+    const joined = `${one}${two}`;
+    ele.innerText = joined;
+    console.log(typeof joined,joined);
+
+    divQuestionWindow.style.display = 'none';
+    divAnswerKey.style.display = "";
+
+    theDiv = document.getElementById('answerKey');
+    // theDiv.appendChild(document.createTextNode(string value || "text"));
+
+    for(let i =0;i<quizDB.length;i++){
+        
+        theDiv.appendChild(document.createTextNode(quizDB[i].question));
+        var br = document.createElement("br");
+        theDiv.appendChild(br);
+        var pTag = document.createElement("p");
+        pTag.className = "answerKeyAns";
+        theDiv.appendChild(br);
+
+        switch(quizDB[i].ans){
+            case "option1":
+                // theDiv.appendChild(document.createTextNode("     Ans: " + quizDB[i].a));
+                pTag.innerHTML = "Ans: " + quizDB[i].a;
+            break;
+
+            case "option2":
+                // theDiv.appendChild(document.createTextNode("     Ans: " + quizDB[i].b));
+                pTag.innerHTML = "Ans: " + quizDB[i].b;
+            break;
+
+            case "option3":
+                // theDiv.appendChild(document.createTextNode("    Ans: " + quizDB[i].c));
+                pTag.innerHTML = "Ans: " + quizDB[i].c;
+            break;
+
+            case "option4":
+                // theDiv.appendChild(document.createTextNode("    Ans: " + quizDB[i].d));
+                pTag.innerHTML = "Ans: " + quizDB[i].d;
+            break;
+        }
+        theDiv.appendChild(pTag);
+        theDiv.appendChild(br);
+    }
+
+    var restartBtn = document.createElement("button");
+    restartBtn.id = "restart";
+    restartBtn.innerHTML="Restart";
+    theDiv.appendChild(restartBtn);
+}
+
+
+let restart = document.getElementById('restart');
+restart.addEventListener('click',function(){
+    qCnt = 0;
+    score=0;
+    loadQuestion();
 });

@@ -21,13 +21,13 @@ ul{
     width: 50vw;
     background-color: aliceblue;
     border-radius: 5%;
-    padding: 3rem 8rem;
+    padding: 3rem 5rem;
     box-shadow: 0 1rem 1rem -0.7rem rgba(0, 0, 0, 0.4);
 }
 
 .question-window h2{
     /* font-size: 2rem; */
-    margin : 0.1rem 0 3rem 0;
+    /* margin : 0.1rem 0 3rem 0; */
 }
 
 .question-window li{
@@ -58,7 +58,7 @@ input,label{
     cursor: pointer;
     background-color:rgb(78, 239, 108) ;
     margin-top:2.5rem;
-    display: none;
+    /* display: none; */
 }
 #nextBtn:hover{
     background-color:rgb(43, 233, 78) ;
@@ -75,9 +75,30 @@ input,label{
     padding: 0.5rem 0.5rem;
     box-sizing: border-box;
     background-color: #7fffd4;
-    display: none;
+    /* display: none; */
     width: fit-content;
     border-radius: 0.5rem;
-
 }
 
+.answerKeyAns{
+    /* color:rgb(9, 240, 9); */
+    background-color:green;
+    width: fit-content;
+    color:white;
+    padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+    border-radius: 0.25rem;
+}
+
+#restart{
+    padding: 0.5rem .5rem;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color:rgb(102, 234, 241) ;
+    /* outline: none; */
+}
+
+#restart:hover{
+    background-color:rgb(39, 234, 244) ;
+}
