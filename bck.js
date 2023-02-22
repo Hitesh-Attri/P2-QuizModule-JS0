@@ -192,14 +192,16 @@ submit.addEventListener('click',function(){
     // user can resubmit the question it will alter the value of the score 
     // if the this function is not called here then user can resubmit all 4 optioncs
     // and by doing this user will know the correct ans. 
-     
+
+    // update : i think now its working fine
+    info.qCnt++;
     saveDataOnLocal();
 });
 
 next.addEventListener('click',function(){
-    info.qCnt++;
+    // info.qCnt++;
     hideNextShowSubmit();
-    console.log(info.qCnt,quizDB.length);
+    // console.log(info.qCnt,quizDB.length);
     if(info.qCnt == quizDB.length){
         showAnswerKey();
     }else{
@@ -285,6 +287,7 @@ function showAnswerKey(){
         info.score=0;
         divQuestionWindow.style.display = '';
         ele.innerText = "Quiz";
+        saveDataOnLocal();
 
         loadQuestion();
     });
@@ -294,3 +297,8 @@ function saveDataOnLocal(){
     let objStr = JSON.stringify(info);
     localStorage.setItem("data",objStr);
 }
+
+function clearLocal(){
+    localStorage.clear();
+}
+// clearLocal();
