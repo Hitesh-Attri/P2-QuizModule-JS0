@@ -18,7 +18,7 @@ ul{
 }
 
 .question-window{
-    width: 35vw;
+    width: 50vw;
     background-color: aliceblue;
     border-radius: 5%;
     padding: 3rem 8rem;
@@ -43,18 +43,41 @@ input,label{
     padding: 0.5rem .5rem;
     outline: none;
     font-size: 1rem;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     background-color:rgb(241, 244, 31) ;
     margin-top:2.5rem;
+    display: visible;
+}
+
+#nextBtn{
+    padding: 0.5rem .5rem;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color:rgb(78, 239, 108) ;
+    margin-top:2.5rem;
+    display: none;
+}
+#nextBtn:hover{
+    background-color:rgb(43, 233, 78) ;
 }
 
 #submit:hover{
     background-color: rgb(245, 215, 82);
-}
 
+}
 
 #correct-incorrect{
     margin-top: 2rem;
+    border: 1px solid black;
+    padding: 0.5rem 0.5rem;
+    box-sizing: border-box;
+    background-color: #7fffd4;
+    display: none;
+    width: fit-content;
+    border-radius: 0.5rem;
+
 }
 
