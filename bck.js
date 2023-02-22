@@ -105,22 +105,33 @@ let answers = document.querySelectorAll('.answer');
 
 console.log(answers);
 
-let qCnt = 0;
-let score = 0;
+const info={
+    qCnt: 0,
+    score: 0
+};
 
 let loadQuestion = function(){
+    let infoRStr = localStorage.getItem("data");
+    // console.log(infoRStr, typeof infoRStr);
+    let infoObjParsed = JSON.parse(infoRStr);
+    console.log(infoObjParsed, typeof infoObjParsed);
 
+    info.score = infoObjParsed.score;
+    info.qCnt = infoObjParsed.qCnt;
+    
     correctIncorrect.style.display = 'none';
     theDiv.style.display = 'none';
 
     next.style.display="none";
-    question.innerText = quizDB[qCnt].question;
+    question.innerText = quizDB[info.qCnt].question;
     // console.log( option1.innerText );
 
-    option1.innerHTML = quizDB[qCnt].a;
-    option2.innerHTML = quizDB[qCnt].b;
-    option3.innerHTML = quizDB[qCnt].c;
-    option4.innerHTML = quizDB[qCnt].d;
+    // console.log(info.score)
+
+    option1.innerHTML = quizDB[info.qCnt].a;
+    option2.innerHTML = quizDB[info.qCnt].b;
+    option3.innerHTML = quizDB[info.qCnt].c;
+    option4.innerHTML = quizDB[info.qCnt].d;
     // console.log( ele.innerHTML );
 }
 
@@ -145,8 +156,8 @@ submit.addEventListener('click',function(){
     if(checkedAnswerId == undefined){
         alert("Select Your Option!");
     }
-    else if(checkedAnswerId === quizDB[qCnt].ans){
-        score++;
+    else if(checkedAnswerId === quizDB[info.qCnt].ans){
+        info.score++;
         // correctIncorrect.style.display = "visible";
         correctIncorrect.style.display = '';
         correctIncorrect.innerHTML = "Correct";
@@ -161,28 +172,50 @@ submit.addEventListener('click',function(){
         showNextHideSub();
     }
     
-    
-    console.log(score);
+    console.log(info.score);
     console.log(checkedAnswerId);
-    // qCnt++;
+    // info.qCnt++;
     // loadQuestion();
 
     // below two lines will uncheck the selected radioinput
-    let radio = document.getElementById(checkedAnswerId);
-    radio.checked = false;
-
+    // let radio = document.getElementById(checkedAnswerId);
+    // radio.checked = false;
+    // console.log("cid: " , checkedAnswerId);
+    if(checkedAnswerId != undefined){
+        document.getElementById("option1").disabled=true;
+        document.getElementById("option2").disabled=true;
+        document.getElementById("option3").disabled=true;
+        document.getElementById("option4").disabled=true;
+    }
+    // this function is called.. but if the submit button was clicked
+    // and then page was reloaded then it will be reloaded from the same function
+    // user can resubmit the question it will alter the value of the score 
+    // if the this function is not called here then user can resubmit all 4 optioncs
+    // and by doing this user will know the correct ans. 
+     
+    saveDataOnLocal();
 });
 
 next.addEventListener('click',function(){
-    qCnt++;
+    info.qCnt++;
     hideNextShowSubmit();
-    console.log(qCnt,quizDB.length);
-    if(qCnt == quizDB.length){
+    console.log(info.qCnt,quizDB.length);
+    if(info.qCnt == quizDB.length){
         showAnswerKey();
     }else{
         loadQuestion();
     }
 
+    let checkedAnswerId = getCheckedAnswerId();
+
+    let radio = document.getElementById(checkedAnswerId);
+    radio.checked = false;
+
+    document.getElementById("option1").disabled=false;
+    document.getElementById("option2").disabled=false;
+    document.getElementById("option3").disabled=false;
+    document.getElementById("option4").disabled=false;
+    saveDataOnLocal();
 });
 
 function showNextHideSub(){
@@ -197,7 +230,7 @@ function hideNextShowSubmit(){
 
 function showAnswerKey(){
     const one = "Score: ";
-    const two = score;
+    const two = info.score;
     const joined = `${one}${two}`;
     ele.innerText = joined;
     console.log(typeof joined,joined);
@@ -248,11 +281,16 @@ function showAnswerKey(){
 
     var restartBtn = document.getElementById('restart');
     restartBtn.addEventListener('click',function(){
-        qCnt = 0;
-        score=0;
+        info.qCnt = 0;
+        info.score=0;
         divQuestionWindow.style.display = '';
         ele.innerText = "Quiz";
 
         loadQuestion();
     });
+}
+
+function saveDataOnLocal(){
+    let objStr = JSON.stringify(info);
+    localStorage.setItem("data",objStr);
 }
