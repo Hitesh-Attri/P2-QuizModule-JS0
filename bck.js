@@ -103,7 +103,7 @@ divAnswerKey.style.display = 'none';
 
 let answers = document.querySelectorAll('.answer');
 
-// console.log(answers);
+console.log(answers);
 
 let qCnt = 0;
 let score = 0;
@@ -112,7 +112,6 @@ let loadQuestion = function(){
 
     correctIncorrect.style.display = 'none';
     theDiv.style.display = 'none';
-
 
     next.style.display="none";
     question.innerText = quizDB[qCnt].question;
@@ -139,7 +138,7 @@ const getCheckedAnswerId = () => {
 
 submit.addEventListener('click',function(){
 
-    console.log("submit button clickedd...");
+    // console.log("submit button clickedd...");
 
     let checkedAnswerId = getCheckedAnswerId();
 
@@ -167,6 +166,11 @@ submit.addEventListener('click',function(){
     console.log(checkedAnswerId);
     // qCnt++;
     // loadQuestion();
+
+    // below two lines will uncheck the selected radioinput
+    let radio = document.getElementById(checkedAnswerId);
+    radio.checked = false;
+
 });
 
 next.addEventListener('click',function(){
