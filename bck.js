@@ -96,6 +96,8 @@ let next = document.querySelector('#nextBtn');
 let correctIncorrect = document.getElementById("correct-incorrect");
 let divQuestionWindow = document.getElementById("question-window");
 let divAnswerKey = document.getElementById("answerKey");
+theDiv = document.getElementById('answerKey');  
+let ele = document.getElementById("score");
 
 divAnswerKey.style.display = 'none';
 
@@ -103,12 +105,15 @@ let answers = document.querySelectorAll('.answer');
 
 // console.log(answers);
 
-let qCnt = 9;
+let qCnt = 0;
 let score = 0;
 
 let loadQuestion = function(){
 
     correctIncorrect.style.display = 'none';
+    theDiv.style.display = 'none';
+
+
     next.style.display="none";
     question.innerText = quizDB[qCnt].question;
     // console.log( option1.innerText );
@@ -187,7 +192,6 @@ function hideNextShowSubmit(){
 }
 
 function showAnswerKey(){
-    let ele = document.getElementById("score");
     const one = "Score: ";
     const two = score;
     const joined = `${one}${two}`;
@@ -197,7 +201,6 @@ function showAnswerKey(){
     divQuestionWindow.style.display = 'none';
     divAnswerKey.style.display = "";
 
-    theDiv = document.getElementById('answerKey');
     // theDiv.appendChild(document.createTextNode(string value || "text"));
 
     for(let i =0;i<quizDB.length;i++){
@@ -235,15 +238,17 @@ function showAnswerKey(){
     }
 
     var restartBtn = document.createElement("button");
-    restartBtn.id = "restart";
+    restartBtn.setAttribute('id','restart');
     restartBtn.innerHTML="Restart";
     theDiv.appendChild(restartBtn);
+
+    var restartBtn = document.getElementById('restart');
+    restartBtn.addEventListener('click',function(){
+        qCnt = 0;
+        score=0;
+        divQuestionWindow.style.display = '';
+        ele.innerText = "Quiz";
+
+        loadQuestion();
+    });
 }
-
-
-let restart = document.getElementById('restart');
-restart.addEventListener('click',function(){
-    qCnt = 0;
-    score=0;
-    loadQuestion();
-});
