@@ -96,7 +96,7 @@ let next = document.querySelector('#nextBtn');
 let correctIncorrect = document.getElementById("correct-incorrect");
 let divQuestionWindow = document.getElementById("question-window");
 let divAnswerKey = document.getElementById("answerKey");
-theDiv = document.getElementById('answerKey');  
+let theDiv = document.getElementById('answerKey');  
 let ele = document.getElementById("score");
 
 divAnswerKey.style.display = 'none';
